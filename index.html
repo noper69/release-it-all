@@ -27,7 +27,7 @@
       padding: 10px;
       font-size: 1.2rem;
       background: rgba(255, 255, 255, 0.1);
-      border: none;
+      border: 2px solid rgba(255,255,255,0.2);
       color: white;
       outline: none;
       resize: none;
@@ -84,6 +84,18 @@
       0%, 100% { opacity: 0.2; }
       50% { opacity: 1; }
     }
+    #muteBtn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 10;
+    }
   </style>
 </head>
 <body>
@@ -92,6 +104,7 @@
     <textarea id="thoughtInput" placeholder="Type your thoughts here..."></textarea><br>
     <button onclick="releaseThought()">Send to the void</button>
   </div>
+  <button id="muteBtn" onclick="toggleMute()">Mute</button>
   <audio id="bgMusic" autoplay loop>
     <source src="deeper-thoughts.mp3" type="audio/mpeg">
     Your browser does not support the audio element.
@@ -137,6 +150,13 @@
         star.style.animationDuration = `${Math.random() * 3 + 2}s`;
         starField.appendChild(star);
       }
+    }
+
+    function toggleMute() {
+      const audio = document.getElementById('bgMusic');
+      const btn = document.getElementById('muteBtn');
+      audio.muted = !audio.muted;
+      btn.textContent = audio.muted ? 'Unmute' : 'Mute';
     }
 
     window.onload = createStars;
